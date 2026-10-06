@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-@import 'tailwindcss';
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import "tailwindcss";
 
 @theme {
   --font-pixel: "Press Start 2P", system-ui;
@@ -21,7 +21,9 @@
 .pixel-scroll::-webkit-scrollbar-thumb {
   background: #f5c518;
   border: 2px solid #3a1f0a;
-  box-shadow: inset 2px 2px 0 #fff3a0, inset -2px -2px 0 #c9a24b;
+  box-shadow:
+    inset 2px 2px 0 #fff3a0,
+    inset -2px -2px 0 #c9a24b;
 }
 .pixel-scroll::-webkit-scrollbar-thumb:hover {
   background: #ffe36b;

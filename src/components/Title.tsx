@@ -1,8 +1,8 @@
 import type { CSSProperties } from "react";
 
 type TitleProps = {
-    name?: string;
-    subtitle?: string;
+  name?: string;
+  subtitle?: string;
 };
 const NOTCH = `polygon(
   0 var(--n), var(--n) var(--n), var(--n) 0,
@@ -22,7 +22,16 @@ type PlateProps = {
   children: React.ReactNode;
 };
 
-function Plate({ border, bg, color, notch, fontSize, padding, letterSpacing, children }: PlateProps) {
+function Plate({
+  border,
+  bg,
+  color,
+  notch,
+  fontSize,
+  padding,
+  letterSpacing,
+  children,
+}: PlateProps) {
   return (
     <div
       className="inline-block"

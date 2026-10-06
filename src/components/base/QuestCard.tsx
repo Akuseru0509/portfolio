@@ -10,9 +10,26 @@ type QuestCardProps = {
   className?: string;
 };
 
-const SIZES: Record<Size, { width: string; notch: string; title: string; label: string; padX: string; padY: string }> = {
-  lg: { width: "clamp(360px, 38vw, 620px)", notch: "clamp(8px, 1vw, 16px)", title: "clamp(18px, 2.2vw, 36px)", label: "clamp(8px, 0.8vw, 12px)", padX: "clamp(20px, 2.6vw, 44px)", padY: "clamp(20px, 2.6vw, 40px)" },
-  xl: { width: "clamp(420px, 50vw, 820px)", notch: "clamp(10px, 1.3vw, 20px)", title: "clamp(24px, 3vw, 52px)", label: "clamp(10px, 1vw, 16px)", padX: "clamp(28px, 3.4vw, 56px)", padY: "clamp(28px, 3.4vw, 52px)" },
+const SIZES: Record<
+  Size,
+  { width: string; notch: string; title: string; label: string; padX: string; padY: string }
+> = {
+  lg: {
+    width: "clamp(360px, 38vw, 620px)",
+    notch: "clamp(8px, 1vw, 16px)",
+    title: "clamp(18px, 2.2vw, 36px)",
+    label: "clamp(8px, 0.8vw, 12px)",
+    padX: "clamp(20px, 2.6vw, 44px)",
+    padY: "clamp(20px, 2.6vw, 40px)",
+  },
+  xl: {
+    width: "clamp(420px, 50vw, 820px)",
+    notch: "clamp(10px, 1.3vw, 20px)",
+    title: "clamp(24px, 3vw, 52px)",
+    label: "clamp(10px, 1vw, 16px)",
+    padX: "clamp(28px, 3.4vw, 56px)",
+    padY: "clamp(28px, 3.4vw, 52px)",
+  },
 };
 
 const NOTCH = `polygon(
@@ -26,12 +43,17 @@ const NOISE = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/s
 
 const PAPER_BG = [
   NOISE,
-  "radial-gradient(ellipse at 18% 22%, rgba(150,100,30,0.28) 0, transparent 22%)", // vết ố
-  "radial-gradient(ellipse at 82% 76%, rgba(140,90,25,0.25) 0, transparent 26%)",  // vết ố
-  "radial-gradient(ellipse at center, transparent 55%, rgba(110,70,20,0.45) 100%)", // viền cháy sẫm
+  "radial-gradient(ellipse at 18% 22%, rgba(150,100,30,0.28) 0, transparent 22%)",
+  "radial-gradient(ellipse at 82% 76%, rgba(140,90,25,0.25) 0, transparent 26%)",
+  "radial-gradient(ellipse at center, transparent 55%, rgba(110,70,20,0.45) 100%)",
 ].join(", ");
 
-export default function QuestCard({ title, size = "lg", children, className = "" }: QuestCardProps) {
+export default function QuestCard({
+  title,
+  size = "lg",
+  children,
+  className = "",
+}: QuestCardProps) {
   const s = SIZES[size];
 
   return (
@@ -62,17 +84,14 @@ export default function QuestCard({ title, size = "lg", children, className = ""
             {title}
           </h2>
 
-    
-        <div className="mt-3 flex items-center gap-3">
+          <div className="mt-3 flex items-center gap-3">
             <div className="h-2 w-2 shrink-0 bg-[#8b6a2f]" />
             <span
-            className="font-pixel uppercase text-[#7a5a22]"
-            style={{ fontSize: s.label, letterSpacing: "0.2em" }}
-            >
-        
-            </span>
+              className="font-pixel uppercase text-[#7a5a22]"
+              style={{ fontSize: s.label, letterSpacing: "0.2em" }}
+            ></span>
             <div className="h-0.5 flex-1 bg-[#a98a4a]" />
-        </div>
+          </div>
 
           {children && (
             <div

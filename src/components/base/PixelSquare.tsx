@@ -5,12 +5,7 @@ interface PixelSquareProps {
   map?: string[];
 }
 
-const DEFAULT_MAP = [
-  "1111",
-  "1111",
-  "1111",
-  "1111",
-];
+const DEFAULT_MAP = ["1111", "1111", "1111", "1111"];
 
 export default function PixelSquare({
   color = "black",
@@ -24,7 +19,7 @@ export default function PixelSquare({
   return (
     <svg
       className={className}
-      style={{filter: `drop-shadow(${pixelSize}px ${pixelSize}px 0 rgba(0,0,0,0.4))`}}
+      style={{ filter: `drop-shadow(${pixelSize}px ${pixelSize}px 0 rgba(0,0,0,0.4))` }}
       width={cols * pixelSize}
       height={rows * pixelSize}
       viewBox={`0 0 ${cols} ${rows}`}
@@ -34,8 +29,8 @@ export default function PixelSquare({
         [...row].map((pixel, x) =>
           pixel === "1" ? (
             <rect key={`${x}-${y}`} x={x} y={y} width={1} height={1} fill={color} />
-          ) : null
-        )
+          ) : null,
+        ),
       )}
     </svg>
   );

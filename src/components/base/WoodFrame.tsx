@@ -4,7 +4,6 @@ type WoodFrameProps = {
   size?: number;
 };
 
-
 const WOOD_GRAIN = [
   "repeating-linear-gradient(90deg, rgba(60,32,12,0.35) 0 2px, transparent 2px 9px)",
   "repeating-linear-gradient(90deg, rgba(200,140,70,0.25) 0 1px, transparent 1px 14px)",
@@ -23,7 +22,6 @@ export default function WoodFrame({ src, alt = "Avatar", size = 160 }: WoodFrame
         filter: "drop-shadow(4px 4px 0 #000)",
       }}
     >
-
       <div
         className="absolute inset-0"
         style={{
@@ -33,7 +31,11 @@ export default function WoodFrame({ src, alt = "Avatar", size = 160 }: WoodFrame
         }}
       />
 
-      <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <svg
+        className="pointer-events-none absolute inset-0 h-full w-full"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+      >
         <g stroke="#3a1f0a" strokeWidth="1.2">
           <line x1="0" y1="0" x2="10" y2="10" />
           <line x1="100" y1="0" x2="90" y2="10" />
@@ -51,7 +53,11 @@ export default function WoodFrame({ src, alt = "Avatar", size = 160 }: WoodFrame
         }}
       >
         {src ? (
-          <img src={src} alt={alt} className="h-full w-full object-cover [image-rendering:pixelated]" />
+          <img
+            src={src}
+            alt={alt}
+            className="h-full w-full object-cover [image-rendering:pixelated]"
+          />
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center gap-1 bg-[#4a3519] text-[#d9b97a]">
             <span style={{ fontSize: size * 0.28 }}>🖼️</span>

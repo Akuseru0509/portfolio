@@ -62,14 +62,14 @@ export default function Background() {
       rect(x + w * 0.3, y, w * 0.4, 3, "#ffffff");
       rect(x + w * 0.1, y + 3, w * 0.8, 3, "#ffffff");
       rect(x, y + 6, w, 2, "#ffffff");
-      rect(x, y + 8, w, 1, "#cfe8fb"); // bóng đáy mây
+      rect(x, y + 8, w, 1, "#cfe8fb");
     };
 
     const drawHill = (base: number, amp: number, freq: number, off: number, color: string) => {
       ctx.fillStyle = color;
       for (let x = 0; x < W; x++) {
         const h = Math.floor(
-          amp * (0.6 * Math.sin(x * freq + off) + 0.4 * Math.sin(x * freq * 2.3 + off * 1.7))
+          amp * (0.6 * Math.sin(x * freq + off) + 0.4 * Math.sin(x * freq * 2.3 + off * 1.7)),
         );
         const top = base - h;
         ctx.fillRect(x, top, 1, H - top);
@@ -131,9 +131,6 @@ export default function Background() {
   }, []);
 
   return (
-    <canvas
-      ref={ref}
-      className="fixed inset-0 z-0 h-full w-full [image-rendering:pixelated]"
-    />
+    <canvas ref={ref} className="fixed inset-0 z-0 h-full w-full [image-rendering:pixelated]" />
   );
 }
