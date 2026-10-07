@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import QuestCard from "../base/QuestCard";
-import PixelIcon, { ICONS } from "../base/PixelIcon";
+import PixelIcon from "../base/PixelIcon";
+import { ICONS } from "../base/Icon";
 
 type Skill = {
   name: string;

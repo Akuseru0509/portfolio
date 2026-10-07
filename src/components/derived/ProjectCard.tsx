@@ -1,5 +1,6 @@
 import QuestCard from "../base/QuestCard";
-import PixelIcon, { ICONS } from "../base/PixelIcon";
+import PixelIcon from "../base/PixelIcon";
+import { ICONS } from "../base/Icon";
 
 type Project = {
   title: string;

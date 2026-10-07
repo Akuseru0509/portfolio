@@ -1,4 +1,4 @@
-import { useState, type ReactNode, useEffect, useRef } from "react";
+import { useCallback, useState, type ReactNode, useEffect, useRef } from "react";
 import TextCard from "../base/TextCard";
 import AboutCard from "./AboutCard";
 import SkillsCard from "./SkillsCard";
@@ -20,40 +20,56 @@ const cards: Record<string, ReactNode> = {
 export default function Menu() {
   const [selected, setSelected] = useState(0);
   const [open, setOpen] = useState<string | null>(null);
-  const lastWheel = useRef(0);
 
-  const handleWheel = (e: React.WheelEvent) => {
-    if (open !== null) return;
+  const wheelLocked = useRef(false);
 
-    const now = performance.now();
-    if (now - lastWheel.current < 200) return;
-    lastWheel.current = now;
+  const wrap = useCallback((i: number) => {
+    return (i + items.length) % items.length;
+  }, []);
 
-    step(e.deltaY > 0 ? 1 : -1);
-  };
+  const step = useCallback(
+    (dir: 1 | -1) => {
+      setSelected((current) => {
+        return wrap(current + dir);
+      });
+    },
+    [wrap],
+  );
 
-  const handleClick = (i: number) => {
-    if (i === selected) activate(i);
-    else setSelected(i);
-  };
-
-  const wrap = (i: number) => (i + items.length) % items.length;
-
-  const activate = (n: number) => {
+  const activate = useCallback((n: number) => {
     const id = items[n].id;
+
     if (id === "cv") {
       const link = document.createElement("a");
+
       link.href = "/hehe.txt";
       link.download = "CV.pdf";
       link.click();
 
       return;
-    } else setOpen(id);
+    }
+
+    setOpen(id);
+  }, []);
+
+  const handleWheel = (e: React.WheelEvent) => {
+    if (open !== null || wheelLocked.current) return;
+
+    wheelLocked.current = true;
+
+    step(e.deltaY > 0 ? 1 : -1);
+
+    setTimeout(() => {
+      wheelLocked.current = false;
+    }, 200);
   };
 
-  const step = (dir: 1 | -1) => {
-    const n = wrap(selected + dir);
-    setSelected(n);
+  const handleClick = (i: number) => {
+    if (i === selected) {
+      activate(i);
+    } else {
+      setSelected(i);
+    }
   };
 
   useEffect(() => {
@@ -62,10 +78,12 @@ export default function Menu() {
         setOpen(null);
         return;
       }
+
       if (e.key === "Enter") {
         activate(selected);
         return;
       }
+
       if (e.key === "ArrowDown" || e.key === "s") {
         e.preventDefault();
         step(1);
@@ -76,14 +94,17 @@ export default function Menu() {
     };
 
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [selected, open]);
+
+    return () => {
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [selected, step, activate]);
 
   return (
     <>
       <nav
         className="fixed left-4 top-1/2 z-5 flex -translate-y-1/2 flex-col gap-25 py-4 pl-2 pr-6"
-        onWheel={handleWheel}
+        onWheel={(event) => handleWheel(event)}
       >
         <div className="pointer-events-none absolute transparent" />
 
